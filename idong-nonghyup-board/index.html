@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이동농협 생활·농업 지식창고</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container header-content">
+            <div class="logo-area">
+                <h1>이동농협 생활·농업 지식창고</h1>
+                <p>조합원·직원·가족 모두를 위한 생활·농업 정보 모음</p>
+            </div>
+            <div class="auth-area" id="auth-ui">
+                <!-- JS will populate this -->
+                <button class="btn-small" onclick="app.switchSection('login')">로그인</button>
+                <button class="btn-small btn-outline" onclick="app.switchSection('signup')">회원가입</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <button class="nav-btn active" data-target="home">홈</button>
+            <button class="nav-btn" data-target="encyclopedia">미니백과</button>
+            <button class="nav-btn" data-target="recipes">로컬푸드 레시피</button>
+            <button class="nav-btn" data-target="board">자유게시판</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <!-- SECTION: HOME -->
+        <section id="home" class="active-section">
+            <div class="greeting-area">
+                <h2>이동농협 생활·농업 지식창고</h2>
+                <p class="greeting-text">조합원, 직원, 가족 모두를 위한 생활·농업 정보를 한 곳에 모았습니다.</p>
+                <div class="greeting-buttons">
+                    <button class="btn-primary" onclick="app.switchSection('encyclopedia')">생활·농업 미니백과 보기</button>
+                    <button class="btn-secondary" onclick="app.switchSection('recipes')">로컬푸드 레시피 보기</button>
+                </div>
+            </div>
+
+            <div class="category-grid-area">
+                <h3>주요 카테고리</h3>
+                <div class="category-grid">
+                    <div class="card category-card" onclick="app.goToEncyclopedia('조합·조합원 기본')">
+                        <div class="icon">🏢</div>
+                        <h4>조합·조합원 기본</h4>
+                        <p>가입 기준, 혜택, 의사결정</p>
+                    </div>
+                    <div class="card category-card" onclick="app.goToEncyclopedia('농업·재배 기초')">
+                        <div class="icon">🌱</div>
+                        <h4>농업·재배 기초</h4>
+                        <p>재배 기술, 영농 상식</p>
+                    </div>
+                    <div class="card category-card" onclick="app.goToEncyclopedia('보조금·지원제도')">
+                        <div class="icon">💰</div>
+                        <h4>보조금·지원제도</h4>
+                        <p>정부/지자체 지원 사업</p>
+                    </div>
+                    <div class="card category-card" onclick="app.goToEncyclopedia('금융·세무 기초')">
+                        <div class="icon">📊</div>
+                        <h4>금융·세무 기초</h4>
+                        <p>농업인 세금, 금융 상품</p>
+                    </div>
+                    <div class="card category-card" onclick="app.goToEncyclopedia('생활·행정 정보')">
+                        <div class="icon">🏠</div>
+                        <h4>생활·행정 정보</h4>
+                        <p>일상 생활 꿀팁</p>
+                    </div>
+                    <div class="card category-card" onclick="app.switchSection('recipes')">
+                        <div class="icon">🍳</div>
+                        <h4>로컬푸드 레시피</h4>
+                        <p>우리 농산물 요리법</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quick-links-area">
+                <h3>자주 찾는 정보</h3>
+                <div class="quick-links-grid">
+                    <button class="btn-outline" onclick="app.goToCard('membership-criteria')">조합원 가입 기준 보기</button>
+                    <button class="btn-outline" onclick="app.goToCard('membership-benefits')">조합원 혜택 한눈에 보기</button>
+                    <button class="btn-outline" onclick="app.goToRecipe('rice')">백옥쌀 레시피 3가지</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: ENCYCLOPEDIA -->
+        <section id="encyclopedia">
+            <div class="section-header">
+                <h2>생활·농업 미니백과</h2>
+                <div class="filters">
+                    <select id="encyclopedia-filter" onchange="app.filterEncyclopedia(this.value)">
+                        <option value="all">전체 보기</option>
+                        <option value="조합·조합원 기본">조합·조합원 기본</option>
+                        <option value="농업·재배 기초">농업·재배 기초</option>
+                        <option value="보조금·지원제도">보조금·지원제도</option>
+                        <option value="금융·세무 기초">금융·세무 기초</option>
+                        <option value="생활·행정 정보">생활·행정 정보</option>
+                    </select>
+                </div>
+            </div>
+            <div id="encyclopedia-list" class="card-list">
+                <!-- JS will populate this -->
+            </div>
+        </section>
+
+        <!-- SECTION: RECIPES -->
+        <section id="recipes">
+            <div class="section-header">
+                <h2>로컬푸드 추천 레시피</h2>
+                <div class="recipe-tags" id="recipe-filters">
+                    <button class="tag active" onclick="app.filterRecipes('all')">전체</button>
+                    <button class="tag" onclick="app.filterRecipes('백옥쌀')">백옥쌀</button>
+                    <button class="tag" onclick="app.filterRecipes('고구마')">고구마</button>
+                    <button class="tag" onclick="app.filterRecipes('배추')">배추</button>
+                    <button class="tag" onclick="app.filterRecipes('계란')">계란</button>
+                </div>
+            </div>
+            <div id="recipe-list" class="card-list">
+                <!-- JS will populate this -->
+            </div>
+        </section>
+
+        <!-- SECTION: BOARD (LIST) -->
+        <section id="board">
+            <div class="section-header">
+                <h2>자유게시판</h2>
+                <button id="btn-write-post" class="btn-primary" onclick="app.goToWritePost()">글쓰기</button>
+            </div>
+            <div class="board-container">
+                <table class="board-table">
+                    <thead>
+                        <tr>
+                            <th width="10%">번호</th>
+                            <th width="50%">제목</th>
+                            <th width="15%">작성자</th>
+                            <th width="25%">작성일</th>
+                        </tr>
+                    </thead>
+                    <tbody id="board-list-body">
+                        <!-- JS will populate this -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECTION: BOARD (WRITE) -->
+        <section id="board-write">
+            <div class="section-header">
+                <h2>글쓰기</h2>
+                <button class="btn-outline" onclick="app.switchSection('board')">목록으로</button>
+            </div>
+            <div class="form-container">
+                <div class="form-group">
+                    <label for="post-title">제목</label>
+                    <input type="text" id="post-title" placeholder="제목을 입력하세요">
+                </div>
+                <div class="form-group">
+                    <label for="post-content">내용</label>
+                    <textarea id="post-content" rows="10" placeholder="내용을 입력하세요"></textarea>
+                </div>
+                <button class="btn-primary full-width" onclick="app.submitPost()">등록하기</button>
+            </div>
+        </section>
+
+        <!-- SECTION: BOARD (VIEW) -->
+        <section id="board-view">
+            <div class="section-header">
+                <h2 id="view-post-title">게시글 제목</h2>
+                <button class="btn-outline" onclick="app.switchSection('board')">목록으로</button>
+            </div>
+            <div class="post-view-container">
+                <div class="post-meta">
+                    <span id="view-post-author">작성자</span> | <span id="view-post-date">날짜</span>
+                </div>
+                <div class="post-content" id="view-post-content">
+                    내용
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: LOGIN -->
+        <section id="login">
+            <div class="auth-container">
+                <h2>로그인</h2>
+                <div class="form-group">
+                    <label for="login-id">아이디</label>
+                    <input type="text" id="login-id" placeholder="아이디">
+                </div>
+                <div class="form-group">
+                    <label for="login-pw">비밀번호</label>
+                    <input type="password" id="login-pw" placeholder="비밀번호">
+                </div>
+                <button class="btn-primary full-width" onclick="app.login()">로그인</button>
+                <p class="auth-link">계정이 없으신가요? <a href="#" onclick="app.switchSection('signup')">회원가입</a></p>
+            </div>
+        </section>
+
+        <!-- SECTION: SIGNUP -->
+        <section id="signup">
+            <div class="auth-container">
+                <h2>회원가입</h2>
+                <div class="form-group">
+                    <label for="signup-id">아이디</label>
+                    <input type="text" id="signup-id" placeholder="아이디">
+                </div>
+                <div class="form-group">
+                    <label for="signup-pw">비밀번호</label>
+                    <input type="password" id="signup-pw" placeholder="비밀번호">
+                </div>
+                <div class="form-group">
+                    <label for="signup-nickname">닉네임</label>
+                    <input type="text" id="signup-nickname" placeholder="닉네임 (작성자명)">
+                </div>
+                <button class="btn-primary full-width" onclick="app.signup()">가입하기</button>
+                <p class="auth-link">이미 계정이 있으신가요? <a href="#" onclick="app.switchSection('login')">로그인</a></p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 이동농협. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
