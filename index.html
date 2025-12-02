@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>이동농협 생활·농업 지식창고</title>
+    <title>농협 생활·농업 지식창고</title>
     <link rel="stylesheet" href="style.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +19,7 @@
     <header class="main-header">
         <div class="container header-content">
             <div class="logo-area">
-                <h1>이동농협 생활·농업 지식창고</h1>
+                <h1>농협 생활·농업 지식창고</h1>
                 <p>조합원·직원·가족 모두를 위한 생활·농업 정보 모음</p>
             </div>
             <div class="auth-area" id="auth-ui">
@@ -46,7 +46,7 @@
         <!-- SECTION: HOME -->
         <section id="home" class="active-section">
             <div class="greeting-area">
-                <h2>이동농협 생활·농업 지식창고</h2>
+                <h2>농협 생활·농업 지식창고</h2>
                 <p class="greeting-text">조합원, 직원, 가족 모두를 위한 생활·농업 정보를 한 곳에 모았습니다.</p>
                 <div class="greeting-buttons">
                     <button class="btn-primary" onclick="app.switchSection('encyclopedia')">생활·농업 미니백과 보기</button>
@@ -93,6 +93,7 @@
             <div class="quick-links-area">
                 <h3>자주 찾는 정보</h3>
                 <div class="quick-links-grid">
+                    <button class="btn-outline" onclick="app.openProtectedLink()">🔒 용인반도체 수용토지 (비밀번호 필요)</button>
                     <button class="btn-outline" onclick="app.goToCard('membership-criteria')">조합원 가입 기준 보기</button>
                     <button class="btn-outline" onclick="app.goToCard('membership-benefits')">조합원 혜택 한눈에 보기</button>
                     <button class="btn-outline" onclick="app.goToRecipe('rice')">백옥쌀 레시피 3가지</button>
@@ -237,7 +238,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 이동농협. All rights reserved.</p>
+            <p>&copy; 2025 JJH. All rights reserved.</p>
         </div>
     </footer>
 

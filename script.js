@@ -531,6 +531,16 @@ const app = {
         this.switchSection('recipes');
         if (filterItem === 'rice') filterItem = '백옥쌀'; // Mapping for the button
         this.filterRecipes(filterItem);
+    },
+
+    openProtectedLink: function () {
+        const password = prompt("비밀번호를 입력하세요:");
+        if (password === "235040") {
+            // window.open might be blocked by pop-up blockers, so use location.href
+            window.location.href = "idong1.html";
+        } else if (password !== null) { // User didn't cancel
+            alert("비밀번호가 틀렸습니다.");
+        }
     }
 };
 
