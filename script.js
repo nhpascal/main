@@ -3,21 +3,201 @@ const encyclopediaData = [
     {
         id: "membership-criteria",
         category: "조합·조합원 기본",
-        title: "조합원, 누가 될 수 있나요?",
-        situation: "조합원이 되려면 어떤 조건이 있어요? 라고 물어볼 때",
-        summaryOneLine: "우리 지역에 주소를 두고, 실제로 농업에 종사하는 분이 기본 대상입니다.",
-        description: [
-            "조합원은 법에 정해진 사업구역(예: 이동읍 등)에 주소를 두고, 일정 범위의 농업에 종사하는 사람, 또는 관련 단체 등이 대상입니다.",
-            "세부 기준(경작면적, 농업 종사 기간 등)은 정관으로 정해져 있습니다.",
-            "가입 시에는 주민등록, 농업경영체 등록 등 농업·거주를 증명할 서류가 필요할 수 있습니다."
-        ],
-        checklist: [
-            "우리 조합의 사업구역 안에 주소를 두고 있는가?",
-            "일정 면적 이상의 농지를 경작하거나, 축산 등 농업에 종사하고 있는가?",
-            "농업경영체 등록, 농지원부 등 증빙서류가 준비 가능한가?",
-            "정관에서 정한 조합원 결격사유에 해당하지 않는가?"
-        ],
-        tip: "가입 전, 농업경영체 등록과 주민등록 등본 등을 미리 준비해 오면 상담이 훨씬 빠릅니다."
+        title: "🌾 이동농협 조합원 가입·탈퇴·승계 안내",
+        situation: "조합원 가입 자격, 서류, 절차 등이 궁금할 때",
+        summaryOneLine: "2025년 신년호 소식지 기준 최신 가입·탈퇴·승계 정보를 확인하세요.",
+        customHtml: `
+            <div class="desktop-view">
+                <div class="tab-container">
+                    <button class="tab-btn active" onclick="app.switchTab('tab-join', this)">가입자격</button>
+                    <button class="tab-btn" onclick="app.switchTab('tab-docs', this)">구비서류</button>
+                    <button class="tab-btn" onclick="app.switchTab('tab-succession', this)">승계/상속</button>
+                    <button class="tab-btn" onclick="app.switchTab('tab-transfer', this)">양수도</button>
+                    <button class="tab-btn" onclick="app.switchTab('tab-withdraw', this)">탈퇴</button>
+                    <button class="tab-btn" onclick="app.switchTab('tab-faq', this)">FAQ/실태조사</button>
+                </div>
+                
+                <div id="tab-join" class="tab-content active">
+                    <h4>1. 조합원 가입 자격</h4>
+                    <p>다음 조건 중 하나 이상을 충족해야 합니다. (2025 신년호 소식지 기준)</p>
+                    <div class="info-box">
+                        <h5>✔ 기본 자격</h5>
+                        <ul>
+                            <li>이동읍 관내에 주소를 두고 거주하는 자</li>
+                            <li>「농업·농촌기본법」 제16조 및 농업경영체 등록 등에 따라 농업에 종사하는 자 또는 농촌에서 직접 농업경영을 하는 자</li>
+                            <li>아래의 농업인 재배·사육 기준 또는 축산법상 가축·곤충 사육 기준을 충족하는 자</li>
+                        </ul>
+                        <h5>✔ 타 지역 조합 중복 가입 금지</h5>
+                        <ul>
+                            <li>동일인이 2개 이상의 다른 지역농협 조합원으로 중복 가입하는 것은 금지</li>
+                        </ul>
+                    </div>
+
+                    <h4>2. 농업인 재배·사육 기준 (소식지 27p)</h4>
+                    <div class="responsive-table">
+                        <table class="data-table">
+                            <thead>
+                                <tr><th>구분</th><th>가축의 종류</th><th>가입 기준</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>대가축</td><td>소, 말, 노새, 당나귀</td><td>2두 이상</td></tr>
+                                <tr><td>중가축</td><td>돼지(젖 먹는 새끼 돼지는 제외), 염소, 면양, 사슴, 개</td><td>5두 이상 (개는 20두 이상)</td></tr>
+                                <tr><td>소가축</td><td>토끼</td><td>50마리 이상</td></tr>
+                                <tr><td>가금</td><td>닭, 오리, 칠면조, 거위</td><td>100마리 이상</td></tr>
+                                <tr><td>기타</td><td>꿀벌</td><td>10군 이상</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p><strong>🌱 작물 재배 기준</strong></p>
+                    <ul>
+                        <li>330㎡(약 100평) 이상 농지에서 농작물 재배</li>
+                        <li>또는 660㎡(약 200평) 이상의 농지에서 채소·과수·화훼 등을 재배하는 경우</li>
+                    </ul>
+
+                    <h4>3. 축산법상 가축 · 곤충 사육 기준 (소식지 27p)</h4>
+                    <p>「축산법」 제2조제1호에 규정된 가축으로서 농림축산식품부장관이 정하여 고시한 기준 이상을 사육하는 경우에도 조합원 자격이 인정됩니다.</p>
+                    <div class="responsive-table">
+                        <table class="data-table">
+                            <thead>
+                                <tr><th>구분</th><th>종류</th><th>사육 기준 (마리 이상)</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td rowspan="4">가축<br>(포유류·조류)</td><td>오소리</td><td>3마리 이상</td></tr>
+                                <tr><td>타조</td><td>3마리 이상</td></tr>
+                                <tr><td>메추리</td><td>300마리 이상</td></tr>
+                                <tr><td>꿩</td><td>30마리 이상</td></tr>
+                                <tr><td rowspan="5">곤충</td><td>흰점박이꽃무지</td><td>1,000마리 이상</td></tr>
+                                <tr><td>장수풍뎅이</td><td>500마리 이상</td></tr>
+                                <tr><td>갈색거저리</td><td>60,000마리 이상</td></tr>
+                                <tr><td>넓적사슴벌레</td><td>500마리 이상</td></tr>
+                                <tr><td>톱사슴벌레</td><td>500마리 이상</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="tab-docs" class="tab-content">
+                    <h4>4. 조합원 신규 가입 구비서류</h4>
+                    <ul class="check-list">
+                        <li>조합원 가입신청서</li>
+                        <li>영농·축산 증빙자료 (농업경영체 등록증, 직불금 지급명세 등)</li>
+                        <li>농지 관련 서류(등기부등본, 임대차계약서 등)</li>
+                        <li>축산·곤충 사육 확인이 가능한 자료</li>
+                        <li>주민등록등본·초본</li>
+                        <li>그 밖에 조합에서 추가로 요구하는 서류</li>
+                    </ul>
+                </div>
+
+                <div id="tab-succession" class="tab-content">
+                    <h4>5. 조합원 상속(승계) 가입</h4>
+                    <div class="info-box">
+                        <h5>승계 대상</h5>
+                        <p>피상속인(사망 조합원)의 배우자·직계존비속이 승계 가능하며, 조합의 자격 심사를 거쳐 승계 승인됩니다.</p>
+                    </div>
+                    <h5>필요 서류(예시)</h5>
+                    <ul>
+                        <li>상속인 관계 증빙(가족관계증명서 등)</li>
+                        <li>사망진단서 또는 제적등본</li>
+                        <li>기존 조합원 출자 및 이용 내역 확인 서류</li>
+                    </ul>
+                </div>
+
+                <div id="tab-transfer" class="tab-content">
+                    <h4>6. 조합원 자격의 양수도</h4>
+                    <div class="info-box">
+                        <h5>✔ 가능 기준</h5>
+                        <ul>
+                            <li>실제로 영농 또는 축산을 계속할 실질 경영자에게 양수도 가능</li>
+                            <li>양수도 후에도 제2·3장의 재배·사육 기준을 충족해야 함</li>
+                        </ul>
+                    </div>
+                    <h5>필요 서류(예시)</h5>
+                    <ul>
+                        <li>조합원 자격 양수도 신청서</li>
+                        <li>양도인·양수인 신분증 사본</li>
+                        <li>영농·축산 증빙자료</li>
+                        <li>기타 조합이 요구하는 서류</li>
+                    </ul>
+                </div>
+
+                <div id="tab-withdraw" class="tab-content">
+                    <h4>7. 조합원 탈퇴 및 지분 환불</h4>
+                    <h5>7-1. 탈퇴 사유(예시)</h5>
+                    <ul>
+                        <li>1년 이상 조합 사업 이용 실적이 없는 경우</li>
+                        <li>2년 이상 예금·대출 등 금융거래 실적이 없는 경우</li>
+                        <li>관내에서 타 지역으로 이주하거나 영농·축산을 완전히 중단한 경우</li>
+                        <li>가입 당시 제출 서류가 허위로 판명된 경우 등</li>
+                    </ul>
+                    <h5>7-2. 탈퇴조합원 지분출자금 환불</h5>
+                    <p>탈퇴 승인 후, 정기총회 의결을 거쳐 출자금·이용고배당금·사업준비금을 환불합니다.</p>
+                    <p class="note">* 채무·연체가 있을 경우 정산 후 남은 금액을 환불</p>
+                </div>
+
+                <div id="tab-faq" class="tab-content">
+                    <h4>8. 조합원 실태조사</h4>
+                    <p>정기적인 조합원 실태조사를 통해 거주 여부, 영농·축산 여부, 이용실적 등을 확인합니다.</p>
+                    <p>조사 결과에 따라 조합원 자격 유지 여부를 검토할 수 있습니다.</p>
+                </div>
+            </div>
+
+            <div class="mobile-view mobile-accordion">
+                <details open>
+                    <summary>1. 조합원 가입 자격 & 기준</summary>
+                    <div class="accordion-content">
+                        <p><strong>기본 자격</strong><br>이동읍 관내 거주 및 농업 종사자</p>
+                        <p><strong>가축 사육 기준</strong></p>
+                        <div class="responsive-table">
+                            <table class="data-table">
+                                <tr><th>구분</th><th>기준</th></tr>
+                                <tr><td>대가축</td><td>2두 이상</td></tr>
+                                <tr><td>중가축</td><td>5두 이상</td></tr>
+                                <tr><td>가금</td><td>100수 이상</td></tr>
+                                <tr><td>기타</td><td>10군 이상</td></tr>
+                            </table>
+                        </div>
+                        <p><strong>곤충 사육 기준</strong></p>
+                        <div class="responsive-table">
+                            <table class="data-table">
+                                <tr><th>종류</th><th>기준</th></tr>
+                                <tr><td>흰점박이꽃무지</td><td>1,000마리</td></tr>
+                                <tr><td>장수풍뎅이</td><td>500마리</td></tr>
+                                <tr><td>갈색거저리</td><td>60,000마리</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </details>
+                <details>
+                    <summary>2. 구비서류</summary>
+                    <div class="accordion-content">
+                        <ul>
+                            <li>가입신청서, 영농·축산 증빙자료</li>
+                            <li>농지 서류, 주민등록등본·초본 등</li>
+                        </ul>
+                    </div>
+                </details>
+                <details>
+                    <summary>3. 승계 및 양수도</summary>
+                    <div class="accordion-content">
+                        <p><strong>승계</strong>: 사망 조합원의 배우자/직계존비속 승계 가능.</p>
+                        <p><strong>양수도</strong>: 실질 경영자에게 양수도 가능 (기준 충족 필수).</p>
+                    </div>
+                </details>
+                <details>
+                    <summary>4. 탈퇴 및 환불</summary>
+                    <div class="accordion-content">
+                        <p><strong>탈퇴</strong>: 1년 미이용, 2년 미거래, 이주/중단 시.</p>
+                        <p><strong>환불</strong>: 총회 의결 후 출자금 등 환불.</p>
+                    </div>
+                </details>
+                <details>
+                    <summary>5. 실태조사</summary>
+                    <div class="accordion-content">
+                        <p>정기 실태조사를 통해 자격 유지 여부를 확인합니다.</p>
+                    </div>
+                </details>
+            </div>
+        `
     },
     {
         id: "membership-benefits",
@@ -192,6 +372,10 @@ const app = {
         this.renderRecipes('all');
         this.renderBoard(); // Render board
         this.setupNavigation();
+
+        // Bind drag handlers
+        this.boundDragMove = this.handleDragMove.bind(this);
+        this.boundDragEnd = this.handleDragEnd.bind(this);
     },
 
     // --- Auth Logic ---
@@ -418,21 +602,35 @@ const app = {
             card.className = 'info-card';
             card.id = item.id;
 
-            let descHtml = item.description.map(p => `<p>• ${p}</p>`).join('');
-            let checklistHtml = item.checklist.map(li => `<li>${li}</li>`).join('');
+            if (item.customHtml) {
+                // Render Custom HTML (for Membership Criteria)
+                card.innerHTML = `
+                    <span class="category-label">${item.category}</span>
+                    <h3>${item.title}</h3>
+                    <p class="situation">"${item.situation}"</p>
+                    <div class="summary">${item.summaryOneLine}</div>
+                    <div class="custom-content">
+                        ${item.customHtml}
+                    </div>
+                `;
+            } else {
+                // Render Standard Card
+                let descHtml = item.description.map(p => `<p>• ${p}</p>`).join('');
+                let checklistHtml = item.checklist.map(li => `<li>${li}</li>`).join('');
 
-            card.innerHTML = `
-                <span class="category-label">${item.category}</span>
-                <h3>${item.title}</h3>
-                <p class="situation">"${item.situation}"</p>
-                <div class="summary">${item.summaryOneLine}</div>
-                <div class="description">${descHtml}</div>
-                <div class="checklist">
-                    <strong>✅ 체크리스트</strong>
-                    <ul>${checklistHtml}</ul>
-                </div>
-                <div class="tip"><strong>💡 조합 TIP:</strong> ${item.tip}</div>
-            `;
+                card.innerHTML = `
+                    <span class="category-label">${item.category}</span>
+                    <h3>${item.title}</h3>
+                    <p class="situation">"${item.situation}"</p>
+                    <div class="summary">${item.summaryOneLine}</div>
+                    <div class="description">${descHtml}</div>
+                    <div class="checklist">
+                        <strong>✅ 체크리스트</strong>
+                        <ul>${checklistHtml}</ul>
+                    </div>
+                    <div class="tip"><strong>💡 조합 TIP:</strong> ${item.tip}</div>
+                `;
+            }
             container.appendChild(card);
         });
     },
@@ -541,10 +739,290 @@ const app = {
         } else if (password !== null) { // User didn't cancel
             alert("비밀번호가 틀렸습니다.");
         }
+    },
+
+    switchTab: function (tabId, btnElement) {
+        // Find the parent container of the clicked button
+        const container = btnElement.closest('.custom-content');
+
+        // Hide all tab contents in this container
+        container.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+
+        // Deactivate all buttons in this container
+        container.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+
+        // Activate target content and button
+        container.querySelector('#' + tabId).classList.add('active');
+        btnElement.classList.add('active');
+    },
+
+    // --- Meeting Manager Logic ---
+    currentMeeting: null,
+    currentActor: 'Admin',
+    dragItem: null,
+    dragOffsetX: 0,
+    dragOffsetY: 0,
+
+    enterMeeting: function () {
+        const name = document.getElementById('meeting-name-input').value.trim();
+        const pw = document.getElementById('meeting-pw-input').value.trim();
+        if (!name || !pw) return alert('모임 이름과 비밀번호를 입력하세요.');
+
+        let meetings = JSON.parse(localStorage.getItem('meetings') || '{}');
+
+        if (!meetings[name]) {
+            // Create new meeting
+            meetings[name] = {
+                password: pw,
+                members: [],
+                logs: [],
+                date: '',
+                place: ''
+            };
+            alert(`새 모임 '${name}'이(가) 생성되었습니다.`);
+        } else {
+            // Login
+            if (meetings[name].password !== pw) {
+                return alert('비밀번호가 틀렸습니다.');
+            }
+        }
+
+        localStorage.setItem('meetings', JSON.stringify(meetings));
+        this.currentMeeting = name;
+        this.loadMeetingDashboard();
+    },
+
+    loadMeetingDashboard: function () {
+        document.getElementById('meeting-auth').style.display = 'none';
+        document.getElementById('meeting-dashboard').style.display = 'block';
+        document.getElementById('current-meeting-name').innerText = this.currentMeeting;
+
+        const meetings = JSON.parse(localStorage.getItem('meetings'));
+        const data = meetings[this.currentMeeting];
+
+        document.getElementById('meeting-date').value = data.date || '';
+        document.getElementById('meeting-place').value = data.place || '';
+
+        this.updateActorSelector(data.members);
+        this.renderBubbles(data.members);
+        this.renderStatusList(data.members);
+        this.renderLogs(data.logs);
+    },
+
+    logoutMeeting: function () {
+        this.currentMeeting = null;
+        document.getElementById('meeting-auth').style.display = 'block';
+        document.getElementById('meeting-dashboard').style.display = 'none';
+        document.getElementById('meeting-name-input').value = '';
+        document.getElementById('meeting-pw-input').value = '';
+    },
+
+    addMeetingMember: function () {
+        const nameInput = document.getElementById('new-member-name');
+        const name = nameInput.value.trim();
+        if (!name) return;
+
+        let meetings = JSON.parse(localStorage.getItem('meetings'));
+        const members = meetings[this.currentMeeting].members;
+
+        if (members.find(m => m.name === name)) {
+            return alert('이미 존재하는 이름입니다.');
+        }
+
+        members.push({ name: name, status: 'undecided', x: 50, y: 50 }); // x,y in percent
+        meetings[this.currentMeeting].members = members;
+        localStorage.setItem('meetings', JSON.stringify(meetings));
+
+        nameInput.value = '';
+        this.loadMeetingDashboard(); // Reload all
+    },
+
+    updateActorSelector: function (members) {
+        const selector = document.getElementById('actor-selector');
+        selector.innerHTML = '<option value="Admin">관리자 (Admin)</option>';
+        members.forEach(m => {
+            const opt = document.createElement('option');
+            opt.value = m.name;
+            opt.innerText = m.name;
+            selector.appendChild(opt);
+        });
+        selector.value = this.currentActor;
+    },
+
+    changeActor: function () {
+        this.currentActor = document.getElementById('actor-selector').value;
+    },
+
+    renderBubbles: function (members) {
+        const container = document.getElementById('zone-undecided'); // Actually we put all bubbles in container relative
+        // But for drag logic, let's put them in the drag-board-container and position absolutely
+        const board = document.querySelector('.drag-board-container');
+        // Clear existing bubbles (except zones)
+        board.querySelectorAll('.bubble').forEach(el => el.remove());
+
+        members.forEach((m, index) => {
+            const bubble = document.createElement('div');
+            bubble.className = `bubble ${m.status === 'attending' ? 'attending' : m.status === 'absent' ? 'absent' : ''}`;
+            bubble.innerText = m.name;
+            bubble.dataset.name = m.name;
+
+            // Initial Position (Randomized slightly in center if undecided, or fixed in zones)
+            // For simplicity, we'll just center them initially or let drag logic handle it.
+            // Let's use the saved x, y or default.
+            // If status is undecided, put in center. Attending -> Right. Absent -> Left.
+
+            let left = '50%';
+            if (m.status === 'attending') left = '80%';
+            if (m.status === 'absent') left = '20%';
+
+            // Add some randomness so they don't overlap perfectly
+            const randomOffset = (index % 5) * 5;
+            bubble.style.left = `calc(${left} + ${randomOffset}px)`;
+            bubble.style.top = `calc(50% + ${randomOffset}px)`;
+
+            // Label for feedback
+            const label = document.createElement('div');
+            label.className = 'bubble-label';
+            bubble.appendChild(label);
+
+            // Drag Events
+            bubble.addEventListener('mousedown', (e) => this.handleDragStart(e, bubble));
+            bubble.addEventListener('touchstart', (e) => this.handleDragStart(e, bubble), { passive: false });
+
+            board.appendChild(bubble);
+        });
+    },
+
+    handleDragStart: function (e, bubble) {
+        if (!this.currentMeeting) return;
+        e.preventDefault();
+        this.dragItem = bubble;
+
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+        const rect = bubble.getBoundingClientRect();
+        this.dragOffsetX = clientX - rect.left;
+        this.dragOffsetY = clientY - rect.top;
+
+        document.addEventListener('mousemove', this.boundDragMove);
+        document.addEventListener('mouseup', this.boundDragEnd);
+        document.addEventListener('touchmove', this.boundDragMove, { passive: false });
+        document.addEventListener('touchend', this.boundDragEnd);
+    },
+
+    handleDragMove: function (e) {
+        if (!this.dragItem) return;
+        e.preventDefault();
+
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+        const board = document.querySelector('.drag-board-container');
+        const boardRect = board.getBoundingClientRect();
+
+        let newX = clientX - boardRect.left - this.dragOffsetX;
+        let newY = clientY - boardRect.top - this.dragOffsetY;
+
+        // Boundary checks
+        newX = Math.max(0, Math.min(newX, boardRect.width - 60)); // 60 is bubble width
+        newY = Math.max(0, Math.min(newY, boardRect.height - 60));
+
+        this.dragItem.style.left = newX + 'px';
+        this.dragItem.style.top = newY + 'px';
+
+        // Visual Feedback based on zone
+        const center = newX + 30;
+        const width = boardRect.width;
+        const label = this.dragItem.querySelector('.bubble-label');
+
+        if (center < width * 0.33) {
+            this.dragItem.classList.add('absent');
+            this.dragItem.classList.remove('attending');
+            label.innerText = "불참";
+            this.dragItem.classList.add('show-label');
+        } else if (center > width * 0.66) {
+            this.dragItem.classList.add('attending');
+            this.dragItem.classList.remove('absent');
+            label.innerText = "참석";
+            this.dragItem.classList.add('show-label');
+        } else {
+            this.dragItem.classList.remove('attending', 'absent');
+            this.dragItem.classList.remove('show-label');
+        }
+    },
+
+    handleDragEnd: function (e) {
+        if (!this.dragItem) return;
+
+        document.removeEventListener('mousemove', this.boundDragMove);
+        document.removeEventListener('mouseup', this.boundDragEnd);
+        document.removeEventListener('touchmove', this.boundDragMove);
+        document.removeEventListener('touchend', this.boundDragEnd);
+
+        const board = document.querySelector('.drag-board-container');
+        const boardRect = board.getBoundingClientRect();
+        const rect = this.dragItem.getBoundingClientRect();
+        const center = (rect.left - boardRect.left) + 30;
+        const width = boardRect.width;
+
+        const name = this.dragItem.dataset.name;
+        let newStatus = 'undecided';
+
+        if (center < width * 0.33) {
+            newStatus = 'absent';
+        } else if (center > width * 0.66) {
+            newStatus = 'attending';
+        }
+
+        this.updateMemberStatus(name, newStatus);
+        this.dragItem = null;
+    },
+
+    updateMemberStatus: function (targetName, newStatus) {
+        let meetings = JSON.parse(localStorage.getItem('meetings'));
+        let meeting = meetings[this.currentMeeting];
+        let member = meeting.members.find(m => m.name === targetName);
+
+        if (member.status !== newStatus) {
+            // Log logic
+            let action = newStatus === 'attending' ? '참석(→)' : newStatus === 'absent' ? '불참(←)' : '미정';
+            let logMsg = `${this.currentActor}님이 ${targetName}님을 ${action}으로 설정했습니다.`;
+
+            meeting.logs.unshift(new Date().toLocaleTimeString() + ' ' + logMsg);
+            member.status = newStatus;
+
+            localStorage.setItem('meetings', JSON.stringify(meetings));
+
+            this.renderStatusList(meeting.members);
+            this.renderLogs(meeting.logs);
+        }
+    },
+
+    renderStatusList: function (members) {
+        const list = document.getElementById('member-status-list');
+        list.innerHTML = '';
+        members.forEach(m => {
+            const li = document.createElement('li');
+            let statusText = m.status === 'attending' ? '🟢 참석' : m.status === 'absent' ? '🔴 불참' : '⚪ 미정';
+            li.innerText = `${m.name}: ${statusText}`;
+            list.appendChild(li);
+        });
+    },
+
+    renderLogs: function (logs) {
+        const list = document.getElementById('meeting-log-list');
+        list.innerHTML = '';
+        logs.forEach(log => {
+            const li = document.createElement('li');
+            li.innerText = log;
+            list.appendChild(li);
+        });
     }
 };
 
 // Initialize app when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
+    window.app = app; // Ensure app is globally accessible for inline onclick handlers
     app.init();
 });

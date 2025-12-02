@@ -87,13 +87,22 @@
                         <h4>로컬푸드 레시피</h4>
                         <p>우리 농산물 요리법</p>
                     </div>
+                    <div class="card category-card" onclick="app.openProtectedLink()">
+                        <div class="icon">🔒</div>
+                        <h4>용인반도체 수용토지</h4>
+                        <p>비밀번호 필요</p>
+                    </div>
+                    <div class="card category-card" onclick="app.switchSection('meeting-manager')">
+                        <div class="icon">📅</div>
+                        <h4>모임 등록</h4>
+                        <p>참석 여부 관리</p>
+                    </div>
                 </div>
             </div>
 
             <div class="quick-links-area">
                 <h3>자주 찾는 정보</h3>
                 <div class="quick-links-grid">
-                    <button class="btn-outline" onclick="app.openProtectedLink()">🔒 용인반도체 수용토지 (비밀번호 필요)</button>
                     <button class="btn-outline" onclick="app.goToCard('membership-criteria')">조합원 가입 기준 보기</button>
                     <button class="btn-outline" onclick="app.goToCard('membership-benefits')">조합원 혜택 한눈에 보기</button>
                     <button class="btn-outline" onclick="app.goToRecipe('rice')">백옥쌀 레시피 3가지</button>
@@ -210,6 +219,82 @@
                 </div>
                 <button class="btn-primary full-width" onclick="app.login()">로그인</button>
                 <p class="auth-link">계정이 없으신가요? <a href="#" onclick="app.switchSection('signup')">회원가입</a></p>
+            </div>
+        </section>
+
+        <!-- SECTION: MEETING MANAGER -->
+        <section id="meeting-manager">
+            <div class="section-header">
+                <h2>모임 관리</h2>
+                <button class="btn-outline" onclick="app.switchSection('home')">홈으로</button>
+            </div>
+
+            <!-- Meeting Login/Register -->
+            <div id="meeting-auth" class="auth-container">
+                <h3>모임 입장 / 등록</h3>
+                <div class="form-group">
+                    <label>모임 이름</label>
+                    <input type="text" id="meeting-name-input" placeholder="예: 12월 정기총회">
+                </div>
+                <div class="form-group">
+                    <label>비밀번호</label>
+                    <input type="password" id="meeting-pw-input" placeholder="관리용 비밀번호">
+                </div>
+                <button class="btn-primary full-width" onclick="app.enterMeeting()">입장 / 생성</button>
+                <p class="note" style="margin-top:10px; font-size:0.8rem; color:#666;">* 새 이름이면 자동 생성됩니다.</p>
+            </div>
+
+            <!-- Meeting Dashboard -->
+            <div id="meeting-dashboard" style="display:none;">
+                <div class="meeting-info-bar">
+                    <h3 id="current-meeting-name">모임 이름</h3>
+                    <div class="meeting-controls">
+                        <select id="actor-selector" onchange="app.changeActor()">
+                            <option value="Admin">관리자 (Admin)</option>
+                        </select>
+                        <button class="btn-small btn-outline" onclick="app.logoutMeeting()">나가기</button>
+                    </div>
+                </div>
+
+                <div class="meeting-setup card">
+                    <h4>설정</h4>
+                    <div class="form-group">
+                        <input type="text" id="meeting-date" placeholder="일시 (예: 12/25 18:00)">
+                        <input type="text" id="meeting-place" placeholder="장소 (예: 마을회관)">
+                    </div>
+                    <div class="form-group" style="display:flex; gap:10px;">
+                        <input type="text" id="new-member-name" placeholder="참석 후보자 이름" style="flex:1;">
+                        <button class="btn-small" onclick="app.addMeetingMember()">추가</button>
+                    </div>
+                </div>
+
+                <div class="drag-board-container">
+                    <div class="drag-zone left-zone" id="zone-absent">
+                        <div class="zone-label">불참 (Left)</div>
+                    </div>
+                    <div class="drag-zone center-zone" id="zone-undecided">
+                        <div class="zone-label">미정 (대기)</div>
+                        <!-- Bubbles will go here -->
+                    </div>
+                    <div class="drag-zone right-zone" id="zone-attending">
+                        <div class="zone-label">참석 (Right)</div>
+                    </div>
+                </div>
+
+                <div class="meeting-panels">
+                    <div class="panel status-panel">
+                        <h4>현재 상태</h4>
+                        <ul id="member-status-list">
+                            <!-- List of members -->
+                        </ul>
+                    </div>
+                    <div class="panel log-panel">
+                        <h4>활동 로그</h4>
+                        <ul id="meeting-log-list">
+                            <!-- Logs -->
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
 
