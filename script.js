@@ -158,8 +158,7 @@ const recipeData = [
     }
 ];
 
-    }
-];
+
 
 // --- LocalStorage Database Helper ---
 const db = {
