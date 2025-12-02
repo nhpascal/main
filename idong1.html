@@ -23664,6 +23664,7 @@
 <div id="control-bar">
     <button onclick="goHome()">🏠 홈으로</button>
     <input type="text" id="searchInput" placeholder="검색어 입력 (예: 지번, 소유자...)" onkeyup="filterTable()">
+    <span id="searchSummary" style="font-weight: bold; color: #00a500;"></span>
     <span style="font-size: 12px; color: #666;">* 첫 번째 행을 클릭하면 정렬됩니다.</span>
 </div>
 
@@ -23679,6 +23680,9 @@
         table = document.querySelector(".waffle");
         tr = table.getElementsByTagName("tr");
 
+        var count = 0;
+        var totalArea = 0;
+
         // Start from row 2 (index 1) to skip header
         for (i = 1; i < tr.length; i++) {
             var visible = false;
@@ -23693,9 +23697,43 @@
                     }
                 }
             }
-            tr[i].style.display = visible ? "" : "none";
+
+            if (visible) {
+                tr[i].style.display = "";
+                count++;
+
+                // Calculate Area (Assuming Area is in the 3rd column, index 2)
+                // The structure seems to be: <th>rowNum</th> <td>Addr</td> <td>Jimok</td> <td>Area</td> ...
+                // So td[2] should be Area.
+                if (td[2]) {
+                    var areaText = td[2].textContent || td[2].innerText;
+                    // Remove "㎡" and commas, then parse
+                    var areaVal = parseFloat(areaText.replace(/[㎡,]/g, ""));
+                    if (!isNaN(areaVal)) {
+                        totalArea += areaVal;
+                    }
+                }
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+
+        // Update Summary Display
+        var summaryEl = document.getElementById("searchSummary");
+        if (filter === "") {
+            // Optional: Show total of everything or nothing when no filter
+            // Let's show total of everything for now as per "searched part" usually implies result set
+            summaryEl.innerText = "전체 " + count + "건 (총 면적: " + totalArea.toLocaleString() + "㎡)";
+        } else {
+            summaryEl.innerText = "검색 결과: " + count + "건 (총 면적: " + totalArea.toLocaleString() + "㎡)";
         }
     }
+
+    // Initialize summary on load
+    document.addEventListener('DOMContentLoaded', function () {
+        filterTable();
+    });
+
 
     // Add click event to header cells for sorting
     document.addEventListener('DOMContentLoaded', function () {
